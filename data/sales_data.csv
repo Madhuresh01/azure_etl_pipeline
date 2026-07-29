@@ -1,0 +1,11 @@
+OrderID,Customer,Product,Quantity,Price,Date
+1001,Amit,Laptop,1,55000,2026-07-01
+1002,Priya,Mouse,2,700,2026-07-02
+1003,Rahul,Keyboard,1,1500,2026-07-02
+1004,Sneha,Monitor,1,12000,2026-07-03
+1005,Vikram,Headphones,2,2500,2026-07-03
+1006,Neha,Webcam,1,3500,2026-07-04
+1007,Arjun,Printer,1,8000,2026-07-04
+1008,Kiran,USB Drive,3,600,2026-07-05
+1009,Riya,Chair,1,6500,2026-07-05
+1010,Ankit,Desk,1,9000,2026-07-06
