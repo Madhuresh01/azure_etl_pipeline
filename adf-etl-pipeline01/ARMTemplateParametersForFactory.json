@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adf-etl-pipeline01"
 		},
+		"LS_AzureBlob_connectionString": {
+			"value": ""
+		},
 		"LS_AzureSQL_password": {
 			"value": ""
 		},
