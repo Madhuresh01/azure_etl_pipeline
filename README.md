@@ -1,10 +1,14 @@
-# 🚀 Azure ETL Pipeline Project
+# 🚀 Azure ETL Pipeline using Python & Microsoft Azure
 
-A complete End-to-End ETL Pipeline built using Python and Microsoft Azure.
+An End-to-End ETL (Extract, Transform, Load) Pipeline built using Python and Microsoft Azure services.
 
-## 📌 Project Overview
+The pipeline extracts sales data from a CSV file, performs data cleaning and transformation, loads the processed data into Azure SQL Database and Azure Blob Storage, generates a sales visualization, and automatically sends an email report.
 
-This project extracts sales data from a CSV file, cleans and transforms it using Pandas, uploads it to Azure SQL Database, stores the cleaned CSV in Azure Blob Storage, generates a sales visualization, and emails the final report automatically.
+---
+
+# 📌 Project Architecture
+
+![Architecture](assets/architecture.png)
 
 ---
 
@@ -25,10 +29,17 @@ This project extracts sales data from a CSV file, cleans and transforms it using
 
 # 📂 Project Structure
 
-```
+```text
 ETL_CAPSTONE/
 │
 ├── adf/
+├── assets/
+│   ├── architecture.png
+│   ├── azure_sql.jpeg
+│   ├── azure_blob.jpeg
+│   ├── email_report.jpeg
+│   └── sales_chart.png
+│
 ├── data/
 ├── etl/
 │   ├── extractor.py
@@ -52,7 +63,7 @@ ETL_CAPSTONE/
 
 # ⚙ ETL Workflow
 
-```
+```text
 CSV File
     │
     ▼
@@ -64,28 +75,27 @@ Transform
     ▼
 Save Cleaned CSV
     │
-    ├────────────► Azure SQL
+    ├────────► Azure SQL Database
     │
-    ├────────────► Azure Blob Storage
-    │
-    ▼
-Generate Chart
+    ├────────► Azure Blob Storage
     │
     ▼
-Send Email
+Generate Sales Chart
+    │
+    ▼
+Send Email Report
 ```
 
 ---
 
 # ✨ Features
 
-- Extract CSV data
-- Clean and transform records
-- Save cleaned dataset
-- Upload to Azure SQL Database
-- Upload CSV to Azure Blob Storage
-- Generate Sales Chart
-- Send HTML Email Report
+- Extract sales data from CSV
+- Data cleaning & transformation using Pandas
+- Upload processed data to Azure SQL Database
+- Store cleaned CSV in Azure Blob Storage
+- Generate sales visualization using Matplotlib
+- Send automated HTML Email Report
 - Environment Variable Support (.env)
 - Modular ETL Architecture
 
@@ -99,7 +109,7 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Run ETL
+Run the project
 
 ```bash
 python run_etl.py
@@ -107,16 +117,32 @@ python run_etl.py
 
 ---
 
-# 📊 Output
+# 📊 Project Output
 
-- Cleaned CSV
-- Azure SQL Table
-- Azure Blob Storage
-- Sales Chart
-- Email Report
+## Azure SQL Database
+
+![Azure SQL](assets/azure_sql.jpeg)
+
+---
+
+## Azure Blob Storage
+
+![Azure Blob](assets/azure_blob.jpeg)
+
+---
+
+## Sales Chart
+
+![Sales Chart](assets/sales_chart.png)
+
+---
+
+## Email Report
+
+![Email Report](assets/email_report.jpeg)
 
 ---
 
 # 👨‍💻 Author
 
-Madhuresh Kumar
+**Madhuresh Kumar**
