@@ -107,4 +107,4 @@ def plot_sales(df):
         output_path,
     )
 
-    return output_path
+    return output_path 

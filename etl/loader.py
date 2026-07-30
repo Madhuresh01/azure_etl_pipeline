@@ -3,12 +3,7 @@ import pandas as pd
 
 
 def save_data(dataframe, table_name, db_path):
-    """
-    Save the cleaned dataframe as a CSV file.
-    """
-
     output_folder = os.path.dirname(db_path)
-
     os.makedirs(output_folder, exist_ok=True)
 
     output_file = os.path.join(
@@ -18,7 +13,7 @@ def save_data(dataframe, table_name, db_path):
 
     dataframe.to_csv(
         output_file,
-        index=False
+        index=False,
     )
 
     print("Cleaned CSV saved successfully.")
@@ -26,5 +21,5 @@ def save_data(dataframe, table_name, db_path):
     return output_file
 
 
-# Backward compatibility
-load = save_data
+def load(dataframe, table_name, db_path):
+    return save_data(dataframe, table_name, db_path)
