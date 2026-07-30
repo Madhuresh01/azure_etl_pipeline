@@ -1,240 +1,97 @@
-# ETL Data Pipeline with Azure SQL, Azure Blob Storage, Azure Data Factory & Email Automation
+# 🚀 Azure ETL Pipeline Project
 
-## Project Overview
+A complete End-to-End ETL Pipeline built using Python and Microsoft Azure.
 
-This project implements a complete ETL (Extract, Transform, Load) Data Pipeline using Python and Microsoft Azure.
+## 📌 Project Overview
 
-The pipeline performs the following tasks automatically:
-
-- Extracts sales data from a CSV file
-- Cleans and transforms the data
-- Saves the cleaned data
-- Uploads data to Azure SQL Database
-- Uploads cleaned CSV to Azure Blob Storage
-- Transfers data from Azure Blob Storage to Azure SQL Database using Azure Data Factory
-- Generates sales visualization
-- Sends an automated email with the sales chart attached.
+This project extracts sales data from a CSV file, cleans and transforms it using Pandas, uploads it to Azure SQL Database, stores the cleaned CSV in Azure Blob Storage, generates a sales visualization, and emails the final report automatically.
 
 ---
 
-# Technologies Used
+# 🛠 Tech Stack
 
 - Python
 - Pandas
-- Matplotlib
 - Azure SQL Database
 - Azure Blob Storage
 - Azure Data Factory
-- Gmail SMTP
 - PyODBC
-- Python Dotenv
+- Azure Storage SDK
+- Matplotlib
+- SMTP (Gmail)
+- Git & GitHub
 
 ---
 
-# Project Architecture
+# 📂 Project Structure
 
-```text
-               +----------------------+
-               |   Sales CSV File     |
-               +----------+-----------+
-                          |
-                          v
-                 Extract (extractor.py)
-                          |
-                          v
-             Transform (transformer.py)
-          - Remove Duplicates
-          - Remove Missing Values
-          - Convert Date Format
-                          |
-                          v
-               Save Clean CSV (loader.py)
-                          |
-              +-----------+-----------+
-              |                       |
-              v                       v
-      Azure SQL Database      Azure Blob Storage
-                                      |
-                                      |
-                                      v
-                         Azure Data Factory Pipeline
-                          (PL_Blob_To_SQL)
-                                      |
-                                      v
-                           Azure SQL Database
-                                      |
-                                      v
-                         Generate Chart (viz.py)
-                                      |
-                                      v
-                    Send Email Report (emailer.py)
 ```
-
----
-
-# Project Structure
-
-```text
-ETL_Capstone/
-
+ETL_CAPSTONE/
 │
 ├── adf/
-│   └── Pipeline JSON Files
-│
 ├── data/
-│   ├── sales_data.csv
-│   └── cleaned_sales_data.csv
-│
 ├── etl/
 │   ├── extractor.py
 │   ├── transformer.py
 │   ├── loader.py
 │   ├── azure_loader.py
+│   ├── blob_storage.py
 │   ├── azure_sql_reader.py
 │   ├── emailer.py
 │   └── viz.py
 │
 ├── reports/
-│   └── sales_chart.png
-│
 ├── templates/
-│   └── email_template.html
-│
-├── .env
+├── run_etl.py
 ├── requirements.txt
 ├── README.md
-└── run_etl.py
+└── .env
 ```
 
 ---
 
-# ETL Workflow
+# ⚙ ETL Workflow
 
-## Step 1 – Extract
-
-- Read `sales_data.csv`
-- Load data into a Pandas DataFrame
-
----
-
-## Step 2 – Transform
-
-- Remove duplicate records
-- Remove missing values
-- Convert Date column into datetime format
-
----
-
-## Step 3 – Load
-
-- Save cleaned CSV
-- Upload data into Azure SQL Database
-- Upload cleaned CSV into Azure Blob Storage
-
----
-
-## Step 4 – Visualization
-
-Generate a bar chart showing total sales by product.
-
-Chart location:
-
-```text
-reports/sales_chart.png
+```
+CSV File
+    │
+    ▼
+Extract
+    │
+    ▼
+Transform
+    │
+    ▼
+Save Cleaned CSV
+    │
+    ├────────────► Azure SQL
+    │
+    ├────────────► Azure Blob Storage
+    │
+    ▼
+Generate Chart
+    │
+    ▼
+Send Email
 ```
 
 ---
 
-## Step 5 – Email Automation
+# ✨ Features
 
-Automatically sends an email after successful ETL execution.
-
-Email contains:
-
-- ETL Success Message
-- Sales Chart Attachment
-
----
-
-## Step 6 – Azure Data Factory Pipeline
-
-An Azure Data Factory pipeline named **PL_Blob_To_SQL** has been created to automate the movement of data from Azure Blob Storage to Azure SQL Database.
-
-Pipeline Components:
-
-- Azure Blob Storage Linked Service
-- Azure SQL Database Linked Service
-- BlobSalesCSV Dataset
-- AzureSqlTable Dataset
-- Copy Data Activity
-
-Pipeline Execution:
-
-- Validate
-- Publish
-- Debug
-- Monitor Pipeline Run
-- Verify Data in Azure SQL Database
+- Extract CSV data
+- Clean and transform records
+- Save cleaned dataset
+- Upload to Azure SQL Database
+- Upload CSV to Azure Blob Storage
+- Generate Sales Chart
+- Send HTML Email Report
+- Environment Variable Support (.env)
+- Modular ETL Architecture
 
 ---
 
-# Azure Services Used
-
-## Azure SQL Database
-
-Stores cleaned sales records.
-
----
-
-## Azure Blob Storage
-
-Stores the cleaned CSV file.
-
-File uploaded:
-
-```
-cleaned_sales_data.csv
-```
-
----
-
-## Azure Data Factory
-
-Used for automated data movement.
-
-Pipeline Name:
-
-```
-PL_Blob_To_SQL
-```
-
-Activity Used:
-
-```
-Copy Data Activity
-```
-
-Pipeline Status:
-
-- Validate ✔
-- Publish ✔
-- Debug ✔
-- Monitor ✔
-
----
-
-# Python Packages
-
-- pandas
-- matplotlib
-- pyodbc
-- python-dotenv
-- azure-storage-blob
-- openpyxl
-
----
-
-# How to Run
+# ▶️ Run Project
 
 Install dependencies
 
@@ -242,7 +99,7 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Run the ETL Pipeline
+Run ETL
 
 ```bash
 python run_etl.py
@@ -250,35 +107,16 @@ python run_etl.py
 
 ---
 
-# Output
+# 📊 Output
 
-The project automatically performs:
-
-- ✔ Load CSV
-- ✔ Clean Data
-- ✔ Save Clean CSV
-- ✔ Upload to Azure SQL
-- ✔ Upload to Azure Blob Storage
-- ✔ Execute Azure Data Factory Pipeline
-- ✔ Copy Blob Data to Azure SQL
-- ✔ Generate Sales Chart
-- ✔ Send Automated Email
+- Cleaned CSV
+- Azure SQL Table
+- Azure Blob Storage
+- Sales Chart
+- Email Report
 
 ---
 
-# Future Enhancements
+# 👨‍💻 Author
 
-- Schedule Azure Data Factory pipeline using Triggers
-- Integrate Power BI Dashboard
-- Add Logging and Monitoring
-- Implement Incremental Data Loading
-- Secure credentials using Azure Key Vault
-- Deploy the project using Azure DevOps CI/CD Pipeline
-
----
-
-# Author
-
-**Madhuresh Kumar**
-
-ETL Data Pipeline using Python, Azure SQL Database, Azure Blob Storage, Azure Data Factory and Email Automation.
+Madhuresh Kumar
