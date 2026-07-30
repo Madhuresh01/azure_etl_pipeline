@@ -3,6 +3,7 @@ from etl.transformer import transform_data
 from etl.loader import save_data
 from etl.viz import plot_sales
 from etl.azure_loader import upload_to_azure
+from etl.blob_storage import upload_to_blob
 from etl.emailer import send_email
 
 
@@ -23,6 +24,9 @@ def main():
 
         # Upload to Azure SQL
         upload_to_azure(data)
+
+        # Upload to Azure Blob Storage
+        upload_to_blob()
 
         # Generate Chart
         plot_sales(data)

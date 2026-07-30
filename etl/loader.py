@@ -1,8 +1,21 @@
+import os
 import pandas as pd
+from dotenv import load_dotenv
 
-def save_data(df, output_file="data/cleaned_sales_data.csv"):
+load_dotenv()
+
+# ==========================================
+# Output File Configuration
+# ==========================================
+
+OUTPUT_FILE = os.getenv("CLEANED_CSV_PATH")
+
+
+def save_data(df):
     """
     Save the transformed dataframe to a CSV file.
     """
-    df.to_csv(output_file, index=False)
-    print(f"✅ Cleaned data saved to {output_file}")
+
+    df.to_csv(OUTPUT_FILE, index=False)
+
+    print(f"✅ Cleaned data saved to {OUTPUT_FILE}")

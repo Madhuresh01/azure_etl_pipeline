@@ -1,19 +1,28 @@
 import os
 import pyodbc
-import pandas as pd
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# ==========================
+# Azure SQL Configuration
+# ==========================
 SERVER = os.getenv("AZURE_SQL_SERVER")
 DATABASE = os.getenv("AZURE_SQL_DATABASE")
 USERNAME = os.getenv("AZURE_SQL_USERNAME")
 PASSWORD = os.getenv("AZURE_SQL_PASSWORD")
 
+TABLE_NAME = os.getenv("AZURE_SQL_TABLE")
+DRIVER = os.getenv("AZURE_SQL_DRIVER")
+
 
 def upload_to_azure(df):
+    """
+    Upload cleaned DataFrame to Azure SQL Database.
+    """
+
     conn_str = (
-        "DRIVER={ODBC Driver 18 for SQL Server};"
+        f"DRIVER={{{DRIVER}}};"
         f"SERVER={SERVER};"
         f"DATABASE={DATABASE};"
         f"UID={USERNAME};"
@@ -26,9 +35,10 @@ def upload_to_azure(df):
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
 
-    cursor.execute("""
-    IF OBJECT_ID('SalesData', 'U') IS NULL
-    CREATE TABLE SalesData (
+    # Create table if it doesn't exist
+    cursor.execute(f"""
+    IF OBJECT_ID('{TABLE_NAME}', 'U') IS NULL
+    CREATE TABLE {TABLE_NAME} (
         OrderID INT,
         Customer NVARCHAR(100),
         Product NVARCHAR(100),
@@ -39,24 +49,36 @@ def upload_to_azure(df):
     """)
     conn.commit()
 
-    cursor.execute("DELETE FROM SalesData")
+    # Clear previous data
+    cursor.execute(f"DELETE FROM {TABLE_NAME}")
     conn.commit()
 
+    # Insert cleaned records
+    insert_query = f"""
+    INSERT INTO {TABLE_NAME}
+    (
+        OrderID,
+        Customer,
+        Product,
+        Quantity,
+        Price,
+        Date
+    )
+    VALUES (?, ?, ?, ?, ?, ?)
+    """
+
     for _, row in df.iterrows():
-        cursor.execute("""
-        INSERT INTO SalesData
-        (OrderID, Customer, Product, Quantity, Price, Date)
-        VALUES (?, ?, ?, ?, ?, ?)
-        """,
-        int(row["OrderID"]),
-        row["Customer"],
-        row["Product"],
-        int(row["Quantity"]),
-        float(row["Price"]),
-        str(row["Date"])
+        cursor.execute(
+            insert_query,
+            int(row["OrderID"]),
+            row["Customer"],
+            row["Product"],
+            int(row["Quantity"]),
+            float(row["Price"]),
+            str(row["Date"])
         )
 
     conn.commit()
     conn.close()
 
-    print("✅ Data uploaded to Azure SQL successfully!")
+    print(f"✅ Data uploaded to Azure SQL table '{TABLE_NAME}' successfully!")
