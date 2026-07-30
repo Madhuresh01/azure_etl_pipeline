@@ -770,7 +770,5 @@ End-to-End Data Engineering Project
 
 This project is intended for educational and portfolio purposes.
 
-## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
 
