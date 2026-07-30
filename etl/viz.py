@@ -1,47 +1,110 @@
+"""
+viz.py
+
+Generate sales visualization for the Azure ETL Pipeline.
+"""
+
+import os
+
 import matplotlib.pyplot as plt
 
+from etl.logger import logger
+from etl.utils import progress, completed
+
+
+# ==========================================================
+# SALES VISUALIZATION
+# ==========================================================
+
 def plot_sales(df):
-    # Group total price by product
-    sales = df.groupby("Product")["Price"].sum()
+    """
+    Generate a sales chart and save it
+    inside the reports directory.
+    """
 
-    # Create bar chart
-    plt.figure(figsize=(8, 5))
-    sales.plot(kind="bar")
+    stage_message = "Generating sales visualization..."
 
-    plt.title("Total Sales by Product")
+    progress(stage_message)
+
+    logger.info(stage_message)
+
+    report_directory = "reports"
+
+    os.makedirs(
+        report_directory,
+        exist_ok=True,
+    )
+
+    # ------------------------------------------------------
+    # PREPARE DATA
+    # ------------------------------------------------------
+
+    sales = (
+        df.groupby("Product")["Price"]
+        .sum()
+        .sort_values(
+            ascending=False
+        )
+    )
+
+    # ------------------------------------------------------
+    # CREATE CHART
+    # ------------------------------------------------------
+
+    plt.figure(
+        figsize=(10, 6)
+    )
+
+    sales.plot(
+        kind="bar"
+    )
+
+    plt.title(
+        "Total Sales by Product",
+        fontsize=15,
+        fontweight="bold",
+    )
+
     plt.xlabel("Product")
-    plt.ylabel("Price")
 
-    plt.xticks(rotation=45)
+    plt.ylabel("Sales")
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+    )
+
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
 
     plt.tight_layout()
 
-    # Save chart
-    plt.savefig("reports/sales_chart.png")
+    # ------------------------------------------------------
+    # SAVE CHART
+    # ------------------------------------------------------
 
-    # Show chart
-    plt.show()
+    output_path = os.path.join(
+        report_directory,
+        "sales_chart.png",
+    )
 
-    print("✅ Chart saved in reports/sales_chart.png")
-    
-    import matplotlib.pyplot as plt
+    plt.savefig(
+        output_path,
+        dpi=300,
+    )
 
+    plt.close()
 
-def plot_sales(df):
-    sales = df.groupby("Product")["Price"].sum()
+    completed(
+        "Sales chart generated successfully."
+    )
 
-    plt.figure(figsize=(8, 5))
-    sales.plot(kind="bar")
+    logger.info(
+        "Sales chart saved at %s",
+        output_path,
+    )
 
-    plt.title("Total Sales by Product")
-    plt.xlabel("Product")
-    plt.ylabel("Price")
-
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-
-    chart_path = "reports/sales_chart.png"
-    plt.savefig(chart_path)
-    plt.show()
-
-    print(f"Chart saved to {chart_path}")
+    return output_path

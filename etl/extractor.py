@@ -2,17 +2,26 @@ import pandas as pd
 
 
 def load_sales_data(csv_path):
-    """Load sales data from a CSV file."""
+    """
+    Load sales CSV file into a Pandas DataFrame.
+    """
 
     try:
-        data = pd.read_csv(csv_path)
-        print("CSV loaded successfully.")
-        return data
+
+        dataframe = pd.read_csv(csv_path)
+
+        print(f"{len(dataframe)} records loaded successfully.")
+
+        return dataframe
 
     except FileNotFoundError:
+
         print("CSV file not found.")
-        return None
+
+        raise
 
     except Exception as error:
-        print(f"Error: {error}")
-        return None
+
+        print("Data extraction failed.")
+
+        raise error
