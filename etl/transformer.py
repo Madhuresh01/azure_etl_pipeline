@@ -1,13 +1,10 @@
 import pandas as pd
 
-def transform_data(df):
-    # Remove duplicate rows
-    df = df.drop_duplicates()
 
-    # Remove rows with missing values
+def transform_data(df):
+    df = df.drop_duplicates()
     df = df.dropna()
 
-    # Convert Date column to datetime
     df["Date"] = pd.to_datetime(df["Date"])
 
     return df

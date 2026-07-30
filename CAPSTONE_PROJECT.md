@@ -2,59 +2,53 @@
 
 ## Project Title
 
-ETL Data Pipeline using Python, Azure SQL, Azure Blob Storage & Email Automation
+ETL Data Pipeline using Python, Azure SQL, Azure Blob Storage and Email Automation
 
 ---
 
-# Project Objective
+# Project Overview
 
-The objective of this project is to build a complete ETL (Extract, Transform, Load) Data Pipeline that automatically extracts sales data, cleans and transforms it, stores it in Azure SQL Database, uploads the cleaned file to Azure Blob Storage, generates a sales visualization, and sends an automated email report.
+This project demonstrates an end-to-end ETL pipeline built using Python and Microsoft Azure services.
+
+The pipeline extracts sales data from a CSV file, cleans and transforms it, stores the processed data in Azure SQL Database, uploads the cleaned CSV to Azure Blob Storage, generates a sales chart, and sends an email report automatically.
 
 ---
 
 # Project Workflow
 
-The project follows the ETL architecture.
-
+```text
 Sales CSV
-↓
-
+    │
+    ▼
 Extract Data
-
-↓
-
+    │
+    ▼
 Transform Data
-
-↓
-
+    │
+    ▼
 Save Clean CSV
-
-↓
-
-Upload to Azure SQL
-
-↓
-
-Upload to Azure Blob Storage
-
-↓
-
+    │
+    ├──► Azure SQL Database
+    │
+    ├──► Azure Blob Storage
+    │
+    ▼
 Generate Sales Chart
-
-↓
-
+    │
+    ▼
 Send Email Report
+```
 
 ---
 
-# Modules Description
+# Project Modules
 
 ## extractor.py
 
-Responsibilities:
+Functions:
 
-- Read sales_data.csv
-- Load data into Pandas DataFrame
+- Read the sales CSV file
+- Load the data into a Pandas DataFrame
 
 Output:
 
@@ -64,23 +58,23 @@ Output:
 
 ## transformer.py
 
-Responsibilities:
+Functions:
 
-- Remove duplicate rows
-- Remove missing values
-- Convert Date column into datetime
+- Remove duplicate records
+- Remove rows with missing values
+- Convert the Date column to datetime format
 
 Output:
 
-- Clean DataFrame
+- Cleaned DataFrame
 
 ---
 
 ## loader.py
 
-Responsibilities:
+Functions:
 
-- Save cleaned dataframe into CSV
+- Save the cleaned DataFrame as a CSV file
 
 Output:
 
@@ -90,36 +84,32 @@ Output:
 
 ## azure_loader.py
 
-Responsibilities:
+Functions:
 
-- Connect Azure SQL Database
-- Create SalesData table (if not exists)
+- Connect to Azure SQL Database
+- Create the SalesData table if it does not exist
 - Upload cleaned records
 
 Output:
 
-- Azure SQL Database updated
+- Data stored in Azure SQL Database
 
 ---
 
 ## azure_sql_reader.py
 
-Responsibilities:
+Functions:
 
-- Read uploaded records from Azure SQL
-
-Output:
-
-- Display first few records
+- Read uploaded records from Azure SQL Database
+- Display sample records
 
 ---
 
-## blob_storage.py (Azure Blob Upload)
+## blob_storage.py
 
-Responsibilities:
+Functions:
 
-- Upload cleaned CSV
-- Store file inside Azure Blob Storage Container
+- Upload cleaned CSV file to Azure Blob Storage
 
 Output:
 
@@ -129,11 +119,11 @@ Output:
 
 ## viz.py
 
-Responsibilities:
+Functions:
 
-- Group sales by Product
-- Generate Bar Chart
-- Save chart inside reports folder
+- Group sales by product
+- Generate a bar chart
+- Save the chart inside the reports folder
 
 Output:
 
@@ -143,15 +133,11 @@ reports/sales_chart.png
 
 ## emailer.py
 
-Responsibilities:
+Functions:
 
-- Load HTML Email Template
-- Attach Sales Chart
-- Send Email automatically using Gmail SMTP
-
-Output:
-
-- Email delivered successfully
+- Create an HTML email
+- Attach the generated sales chart
+- Send the report using Gmail SMTP
 
 ---
 
@@ -163,7 +149,7 @@ Purpose:
 
 Store transformed sales records.
 
-Features Used:
+Features:
 
 - SQL Tables
 - ODBC Driver
@@ -175,7 +161,7 @@ Features Used:
 
 Purpose:
 
-Store cleaned CSV file in cloud storage.
+Store the cleaned CSV file.
 
 Container:
 
@@ -196,21 +182,20 @@ cleaned_sales_data.csv
 - Azure SQL Database
 - Azure Blob Storage
 - Gmail SMTP
-- Jinja2
-- Dotenv
+- python-dotenv
 
 ---
 
-# Project Folder Structure
+# Project Structure
 
-```
+```text
 ETL_Capstone/
 
+├── assets/
 ├── data/
 ├── etl/
 ├── reports/
 ├── templates/
-├── .env
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -221,54 +206,43 @@ ETL_Capstone/
 
 ---
 
-# Project Features
+# Features
 
-✔ ETL Architecture
-
-✔ Data Cleaning
-
-✔ Azure SQL Integration
-
-✔ Azure Blob Storage Upload
-
-✔ Sales Visualization
-
-✔ Email Automation
-
-✔ Modular Python Code
-
-✔ Environment Variables
-
-✔ GitHub Ready Structure
+- End-to-end ETL pipeline
+- Data cleaning and transformation
+- Azure SQL integration
+- Azure Blob Storage upload
+- Sales visualization
+- Email automation
+- Modular project structure
+- Environment variable support
 
 ---
 
 # Output
 
-The pipeline performs the following automatically:
+The pipeline performs the following tasks:
 
-- Load CSV
-- Clean Data
-- Save Clean CSV
-- Upload to Azure SQL
-- Upload to Azure Blob Storage
-- Generate Sales Chart
-- Send Email Report
+- Read the input CSV
+- Clean and transform the data
+- Save the cleaned CSV
+- Upload data to Azure SQL Database
+- Upload the CSV to Azure Blob Storage
+- Generate a sales chart
+- Send an email report
 
 ---
 
 # Future Improvements
 
-- Schedule pipeline using Azure Data Factory
-- Store logs in Azure Monitor
-- Add Power BI Dashboard
+- Schedule the pipeline using Azure Data Factory
+- Store logs for monitoring
+- Add a Power BI dashboard
 - Dockerize the application
-- CI/CD using GitHub Actions
+- Implement CI/CD using GitHub Actions
 
 ---
 
 # Author
 
 **Madhuresh Kumar**
-
-Python ETL Capstone Project

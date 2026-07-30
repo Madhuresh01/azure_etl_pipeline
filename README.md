@@ -1,18 +1,18 @@
-# 🚀 Azure ETL Pipeline using Python & Microsoft Azure
+# Azure ETL Pipeline using Python and Microsoft Azure
 
-An End-to-End ETL (Extract, Transform, Load) Pipeline built using Python and Microsoft Azure services.
+An end-to-end ETL (Extract, Transform, Load) pipeline built using Python and Microsoft Azure services.
 
-The pipeline extracts sales data from a CSV file, performs data cleaning and transformation, loads the processed data into Azure SQL Database and Azure Blob Storage, generates a sales visualization, and automatically sends an email report.
+The project extracts sales data from a CSV file, cleans and transforms it, uploads the processed data to Azure SQL Database and Azure Blob Storage, generates a sales chart, and sends an email report automatically.
 
 ---
 
-# 📌 Project Architecture
+# Project Architecture
 
 ![Architecture](assets/architecture.png)
 
 ---
 
-# 🛠 Tech Stack
+# Technologies Used
 
 - Python
 - Pandas
@@ -22,12 +22,13 @@ The pipeline extracts sales data from a CSV file, performs data cleaning and tra
 - PyODBC
 - Azure Storage SDK
 - Matplotlib
-- SMTP (Gmail)
-- Git & GitHub
+- Gmail SMTP
+- Git
+- GitHub
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```text
 ETL_CAPSTONE/
@@ -56,12 +57,12 @@ ETL_CAPSTONE/
 ├── run_etl.py
 ├── requirements.txt
 ├── README.md
-└── .env
+└── .env.example
 ```
 
 ---
 
-# ⚙ ETL Workflow
+# ETL Workflow
 
 ```text
 CSV File
@@ -75,9 +76,9 @@ Transform
     ▼
 Save Cleaned CSV
     │
-    ├────────► Azure SQL Database
+    ├──► Azure SQL Database
     │
-    ├────────► Azure Blob Storage
+    ├──► Azure Blob Storage
     │
     ▼
 Generate Sales Chart
@@ -88,28 +89,28 @@ Send Email Report
 
 ---
 
-# ✨ Features
+# Features
 
-- Extract sales data from CSV
-- Data cleaning & transformation using Pandas
+- Extract sales data from a CSV file
+- Clean and transform data using Pandas
 - Upload processed data to Azure SQL Database
-- Store cleaned CSV in Azure Blob Storage
-- Generate sales visualization using Matplotlib
-- Send automated HTML Email Report
-- Environment Variable Support (.env)
-- Modular ETL Architecture
+- Upload the cleaned CSV to Azure Blob Storage
+- Generate a sales chart using Matplotlib
+- Send an automated HTML email report
+- Use environment variables for configuration
+- Modular project structure
 
 ---
 
-# ▶️ Run Project
+# Running the Project
 
-Install dependencies
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the project
+Run the project:
 
 ```bash
 python run_etl.py
@@ -117,7 +118,7 @@ python run_etl.py
 
 ---
 
-# 📊 Project Output
+# Project Output
 
 ## Azure SQL Database
 
@@ -143,6 +144,6 @@ python run_etl.py
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Madhuresh Kumar**
