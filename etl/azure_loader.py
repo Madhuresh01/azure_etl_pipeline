@@ -23,17 +23,6 @@ def upload_to_azure(df):
         "Connection Timeout=30;"
     )
 
-    # DEBUG OUTPUT
-    print("\n========== DEBUG ==========")
-    print("SERVER:", SERVER)
-    print("DATABASE:", DATABASE)
-    print("USERNAME:", USERNAME)
-    print("PASSWORD LOADED:", PASSWORD is not None)
-    print("PASSWORD LENGTH:", len(PASSWORD) if PASSWORD else 0)
-    print("\nCONNECTION STRING:")
-    print(conn_str)
-    print("===========================\n")
-
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
 

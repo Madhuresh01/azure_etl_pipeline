@@ -3,9 +3,11 @@ from etl.transformer import transform_data
 from etl.loader import save_data
 from etl.viz import plot_sales
 from etl.azure_loader import upload_to_azure
+from etl.emailer import send_email
 
 
 def main():
+
     file_path = "data/sales_data.csv"
 
     # Extract
@@ -22,12 +24,17 @@ def main():
         # Upload to Azure SQL
         upload_to_azure(data)
 
-        # Visualization
+        # Generate Chart
         plot_sales(data)
+
+        # Send Email
+        send_email()
 
         # Preview
         print("\nFirst 5 rows:")
         print(data.head())
+
+        print("\n✅ ETL Pipeline Completed Successfully!")
 
 
 if __name__ == "__main__":
